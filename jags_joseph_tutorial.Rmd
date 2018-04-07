@@ -50,8 +50,6 @@ Before diving into the JAGS code, it's worth taking a look at the model that JGC
 
 One of the difficulties that the problem posed by JGC contains is that our estimate of the prevalence is dependent upon the performance of the test, just as our understanding of the performance of the test is dependent on our knowledge of the prevalence of the disease in this population. JGC get around this difficulty by recruiting tropical disease experts to create priors for the test characteristics. 
 
-# image of the test characteristics priors
-
 On the other hand, they had literally no idea about the prevalence of this parasite in the population at hand, so they used a uniform prior ranging from 0 to 1.
 
 The way that a JAGS model works is that it iterates through each observation and updates the priors with each run. You might notice, too, that the models are written upside-down -- the priors come *after* the model itself. Using *p* for prevalence, *y* for the observed test result, and JGC's terminology of *S* for sensitivity and *C* for specificity, our two one-test models are:
