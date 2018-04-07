@@ -2,7 +2,7 @@
 title: "JAGS tutorial with replication of Joseph, et al."
 author: "Nathaniel Hendrix"
 date: "April 4, 2018"
-output: html_document
+output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
