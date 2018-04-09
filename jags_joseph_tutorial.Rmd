@@ -1,7 +1,7 @@
 ---
 title: "JAGS tutorial with replication of Joseph, et al."
 author: "Nathaniel Hendrix"
-date: "April 4, 2018"
+date: "April 9, 2018"
 output: pdf_document
 ---
 
@@ -52,7 +52,7 @@ One of the difficulties that the problem posed by JGC contains is that our estim
 
 On the other hand, they had literally no idea about the prevalence of this parasite in the population at hand, so they used a uniform prior ranging from 0 to 1.
 
-The way that a JAGS model works is that it iterates through each observation and updates the priors with each run. You might notice, too, that the models are written upside-down -- the priors come *after* the model itself. Using *p* for prevalence, *y* for the observed test result, and JGC's terminology of *S* for sensitivity and *C* for specificity, our two one-test models are:
+The way that a JAGS model works is that it iterates through each observation and updates the priors with each run. You might notice, too, that the models are written upside-down -- the priors come *after* the model itself. Using *p* for prevalence, *y* for the observed test result, and JGC's terminology of *S* for sensitivity and *C* for specificity, our two one-test models (with values taken from Table 1 of JGC) are:
 
 ```{r model}
 # create the model for stool exam
@@ -111,7 +111,7 @@ stool_samples <- coda.samples(jags_stool,
 summary(stool_samples)
 ```
 
-Let's see how these results compare to those found in JGC. For the prevalence, they found a median of 0.74 with 95\% credible interval of 0.41-0.98. We're a little off on the low end, but not bad! For sensitivity, they found 0.30 (0.21-0.47) and here we're extremely close. Same for specificity, where they found 0.95 (0.88-0.99).
+Let's see how these results compare to those found in Table 5 of JGC. For the prevalence, they found a median of 0.74 with 95\% credible interval of 0.41-0.98. We're a little off on the low end, but not bad! For sensitivity, they found 0.30 (0.21-0.47) and here we're extremely close. Same for specificity, where they found 0.95 (0.88-0.99).
 
 I'll repeat the same process below for the serology test.
 
@@ -156,7 +156,8 @@ legend(0, 14,
                   "Specificity of stool examination",
                   "Sensitivity of serologic test",
                   "Specificity of serologic test"),
-       lty=1:4)
+       lty=1:4,
+       cex=0.8)
 ```
 
 Looking good!
