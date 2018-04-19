@@ -3,6 +3,7 @@ title: "JAGS tutorial with replication of Joseph, et al."
 author: "Nathaniel Hendrix"
 date: "April 9, 2018"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 ---
@@ -24,7 +25,7 @@ For my example, I'll be performing a replication of a well-known paper by Lawren
 
 ## Required packages
 
-JAGS is a stand-alone package that must be downloaded and installed outside of the R environment before installing the R packages from CRAN.
+JAGS is a stand-alone package that must be [downloaded and installed outside of the R environment](http://mcmc-jags.sourceforge.net/) before installing the R packages from CRAN.
 
 Once JAGS has been downloaded, you'll need to install two more packages, `rjags` and `coda`. The former is to run the JAGS model from R, while the latter focuses on display of the results.
 
@@ -166,7 +167,9 @@ Looking good!
 
 Now to explore the full dataset in which both tests were administered to all patients. We'll be able to compare the test characteristics when both tests are administered versus just one, as well as to update our estimate of the prevalence of *Strongyloides*. This approach uses the Hui-Walter paradigm, and the code again borrows heavily from the Lewis / Gorgerson paper linked above. However, you can find many papers that use this approach (and provide code) if you search for "Hui-Walter paradigm" in Google Scholar or similar.
 
-The model we'll build constructs a 4\*N matrix so we'll first need to use the `var` command to tell JAGS to build that matrix. Below that, we'll use the test results to construct a matrix of true likelihood values, as derived from the test characteristics. We'll also use a vector of 1\*N comprising only 1s, which ensures that our prevalence results are in an appropriate range.
+Our main objective in running this is to estimate the prevalence based on the results of both tests. In examining the joint probability of the two tests, though, the likelihood data isn't drawn from a distrubtion but rather from the observations themselves. The `L` vector below, then, determines what combination of test results a given observation should contribute its likelihood to. And the vector of ones uses a trick from the WinBUGS days to make sure that these likelihood values contribute to the model.
+
+The matrices we'll construct to contain the different joint probabilities are constructed within the model itself by the `var` command.
 
 For this section, we'll consider the stool examination to be test 1 and the serologic test to be test 2. Therefore, the parameter `C1`, for example, will be the specificity of the stool exam.
 
